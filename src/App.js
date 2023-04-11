@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import Users from './components/users'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Error from './components/error'
+import Home from './components/home'
+import User from './components/user'
+import Expense from './components/expense'
+import Navbar from './components/navbar'
+// by using router, run "npm install react-router-dom" in project folder
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    return <Router>
+      <div className='container'>
+        {/* the navbar */}
+        <Navbar/>
+        
+        <Routes>
+          <Route exact path="/" Component={Home} />
 
-export default App;
+          <Route exact path="/users" Component={Users} />
+          {/* the ':' is used to show a path variable that will come in */}
+          <Route exact path="/users/:id" Component={User} />
+
+          <Route exact path="/exp" Component={Expense} />
+
+          {/* thats for every other page; already that doesnt match above*/}
+          <Route path="*" Component={Error} />
+          
+        </Routes>
+
+        <footer>&copy; Charliexstyles 2017</footer>
+      </div>
+    </Router>;
+  };
+
+export default App
